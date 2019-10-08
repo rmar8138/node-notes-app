@@ -1,7 +1,6 @@
 const chalk = require("chalk");
 const yargs = require("yargs");
-const { 
-  getNotes,
+const {
   addNote,
   removeNote,
   listNotes,
