@@ -33,6 +33,33 @@ const removeNote = (title) => {
   }
 }
 
+const listNotes = () => {
+  notes = loadNotes();
+
+  if (notes.length > 0) {
+    console.log(chalk.green.inverse("Your notes:\n"))
+    notes.forEach(({ title, body }) => {
+      console.log(`\nTitle: ${title}`);
+      console.log(body + "\n")
+      console.log("*********")
+    })
+  } else {
+    console.log(chalk.red.inverse("Error: no notes to list!"))
+  }
+}
+
+const readNote = title => {
+  notes = loadNotes();
+  note = notes.find(note => note.title === title);
+  
+  if (note) {
+    console.log(`Title: ${note.title}`);
+    console.log(note.body);
+  } else {
+    console.log(chalk.red.inverse("Error: note not found"))
+  }
+}
+
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
@@ -48,4 +75,10 @@ const saveNotes = (notes) => {
   fs.writeFileSync("notes.json", dataJSON);
 }
 
-module.exports = { getNotes, addNote, removeNote };
+module.exports = { 
+  getNotes,
+  addNote,
+  removeNote,
+  listNotes,
+  readNote
+};
